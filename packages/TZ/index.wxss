@@ -37,7 +37,7 @@
 }
 
 .scroll-wrapper{
-  height: calc(100vh - 534rpx);
+  height: calc(100vh - 544rpx);
 }
 
 .border-wrapper{
