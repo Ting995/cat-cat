@@ -1,0 +1,19 @@
+<!-- 俄罗斯方块 -->
+<view class="text-center h40">俄罗斯方块-平移版</view>
+<view class="fk-main">
+    <view class="fk-content" style="top: {{positionTop}}rpx;">
+        <view wx:for="{{allArr}}" wx:for-item="allItem" wx:for-index="allIndex" wx:key="allIndex" class="fk-content-line">
+            <view
+                wx:for="{{allItem.oneList}}"  wx:for-index="chIndex" wx:key="chIndex" wx:if="{{item.sum!=0}}" class="{{'fk-content-item color-'+item.color||'tran'}}" 
+                data-info="{{item}}"
+                data-allIndex="{{allIndex}}"
+                data-index="{{chIndex}}"
+                data-width="{{item.sum*80}}" style="width: {{item.sum*80}}rpx;left:{{item.left*80}}rpx;" bindtouchstart="onDragStart" bindtouchmove="onDragMove" bindtouchend="onDragEnd"
+            ></view>
+            <view wx:if="{{dragInfo.sum!=0&&allIndex==dragInfo.allindex}}" class="{{'fk-content-item color-'+dragInfo.color}}" style="width: {{dragInfo.sum*80}}rpx;left:{{dragInfo.left*80}}rpx;opacity: .5;"></view>
+        </view>
+    </view>
+</view>
+<view style="width: 80rpx;" id="fk-box"></view>
+<button bind:tap="moveUpFn">移动</button>
+<button bind:tap="resetFn" class="reset">重置</button>
