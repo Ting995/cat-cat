@@ -29,11 +29,16 @@
 }
 
 .bg-item{
+  position: relative;
   width: 225rpx;
   height: 150rpx;
   background: var(--bg);
   margin-left: 20rpx;
   margin-top: 20rpx;
+}
+
+.material-active{
+  border: 2rpx solid #333333;
 }
 
 .scroll-wrapper{
@@ -46,6 +51,7 @@
  }
 
  .border-item{
+  position: relative;
   width: 215rpx;
   height: 150rpx;
   border: 4rpx var(--border) #f894b1;
@@ -64,6 +70,7 @@
  }
 
  .sticker-item{
+  position: relative;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -73,4 +80,10 @@
   margin-top: 20rpx;
   border: 2rpx solid #fac0cb;
   border-radius: 12rpx;
+ }
+
+ .icon-success{
+   position: absolute;
+   bottom:0;
+   right:0
  }
