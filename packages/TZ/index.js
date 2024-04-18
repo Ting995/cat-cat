@@ -16,7 +16,7 @@ Page({
     stickerList: [`${url}/flower-1.png`, `${url}/flower-2.png`, `${url}/flower-3.png`, `${url}/flower-4.png`, `${url}/flower-5.png`, `${url}/flower-6.png`, `${url}/flower-7.png`, `${url}/flower-8.png`], // 贴纸列表
     bgIndex: 0,
     borderIndex: 0,
-    stickerIndex: 0,
+    stickerIndex: '',
     bgChecked: '', // 选中的背景
     borderChecked: '',
     stickerChecked: '',
@@ -31,20 +31,16 @@ Page({
     })
   },
   initCanvas() {
-    const canvasContext = wx.createCanvasContext('myCanvas');
-    canvasContext.setFillStyle(this.data.bgChecked) // 绘制背景色
-    canvasContext.fillRect(10, 0, 350, 450);
-    let stickerImage = wx.createImage();
-    stickerImage.src = this.data.stickerChecked // 这里替换为实际的网络或本地资源路径
-    stickerImage.onload = function () {
-      // 图片加载完成后进行绘制和旋转
-      let stickerX = 10
-      let stickerY = 10
-      let width = 84;
-      let height = 84;
-      canvasContext.drawImage(stickerImage,stickerX, stickerY, width, height);
-    };
-    canvasContext.draw();
+    const ctx = wx.createCanvasContext('myCanvas');
+    ctx.setFillStyle(this.data.bgChecked) // 绘制背景色
+    ctx.fillRect(10, 0, 350, 450);
+    wx.getImageInfo({
+      src: this.data.stickerChecked,
+      success: (res) => {
+        ctx.drawImage(res.path, 10, 10, res.width, res.height); 
+      }
+    });
+    ctx.draw();
   },
   changeTab(e) {
     const {
@@ -75,7 +71,8 @@ Page({
         break;
       case 'sticker': // 贴纸
         this.setData({
-          stickerChecked: item
+          stickerChecked: item,
+          stickerIndex:index
         })
         break;
     }

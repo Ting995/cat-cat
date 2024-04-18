@@ -6,9 +6,9 @@
 </view>
 <!-- 背景 -->
 <scroll-view wx:if="{{tabIndex==0}}" scroll-y class="scroll-wrapper">
-  <view class="bg-wrapper" >
+  <view class="bg-wrapper">
     <view wx:for="{{bgList}}" wx:key="index" class="bg-item " style="--bg:{{item}}" bindtap="changeMaterial" data-index="{{index}}" data-item="{{item}}" data-type="bg">
-    <icon wx:if="{{index==bgIndex}}" class="icon-success" type="success_no_circle" size="30"></icon>
+      <icon wx:if="{{index==bgIndex}}" class="icon-success" type="success_no_circle" size="30"></icon>
     </view>
   </view>
 </scroll-view>
@@ -21,8 +21,9 @@
 <!-- 贴纸 -->
 <scroll-view wx:if="{{tabIndex==2}}" scroll-y class="scroll-wrapper">
   <view class="sticker-wrapper">
-  <view wx:for="{{stickerList}}" wx:key="index" class="sticker-item" bindtap="changeMaterial" data-item="{{item}}" data-index="{{index}}" data-type="sticker">
-    <image src="{{item}}"  class="sticker-img" ></image>
-  </view>
+    <view wx:for="{{stickerList}}" wx:key="index" class="sticker-item" bindtap="changeMaterial" data-item="{{item}}" data-index="{{index}}" data-type="sticker">
+      <image src="{{item}}" class="sticker-img"></image>
+      <icon wx:if="{{index==stickerIndex}}" class="icon-success" type="success_no_circle" size="30"></icon>
+    </view>
   </view>
 </scroll-view>
