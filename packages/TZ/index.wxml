@@ -1,5 +1,5 @@
 <view style="width:100%;height:450rpx;margin-bottom: 20rpx;">
-  <canvas canvas-id="myCanvas" style="width: 100%; height: 100%;"></canvas>
+  <canvas id="myCanvas" type="2d" style="width: 100%; height: 100%;"></canvas>
 </view>
 <view class="tab-wrapper">
   <view wx:for="{{tabList}}" class="tab-item {{index==tabIndex?'tab-item-active':'tab-item-no-active'}}" wx:key="index" bindtap="changeTab" data-item="{{item}}" data-index="{{index}}">{{item.title}}</view>

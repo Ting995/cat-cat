@@ -1,4 +1,5 @@
 let url = 'http://kayousaishi.oss-cn-hangzhou.aliyuncs.com/K9/activity/YTXWZ'
+let ctx
 Page({
   data: {
     tabList: [{
@@ -31,16 +32,31 @@ Page({
     })
   },
   initCanvas() {
-    const ctx = wx.createCanvasContext('myCanvas');
-    ctx.setFillStyle(this.data.bgChecked) // 绘制背景色
-    ctx.fillRect(10, 0, 350, 450);
-    wx.getImageInfo({
-      src: this.data.stickerChecked,
-      success: (res) => {
-        ctx.drawImage(res.path, 10, 10, res.width, res.height); 
-      }
-    });
-    ctx.draw();
+    const that = this
+    const query = wx.createSelectorQuery()
+    query.select('#myCanvas')
+      .fields({
+        node: true,
+        size: true
+      })
+      .exec((res) => {
+        const canvas = res[0].node
+        ctx = canvas.getContext('2d')
+        ctx.fillStyle = this.data.bgChecked // 绘制背景色
+        ctx.fillRect(5, 0, 290, 400);  // 矩形框
+        const image = canvas.createImage()  // 绘制贴纸图片
+        image.onload = (res) => {
+          console.log( image.width, image.height);
+          ctx.drawImage(
+            image,
+            10,
+            10,
+            image.width,
+            image.height,
+          )
+        }
+        image.src = this.data.stickerChecked
+      })
   },
   changeTab(e) {
     const {
@@ -72,7 +88,7 @@ Page({
       case 'sticker': // 贴纸
         this.setData({
           stickerChecked: item,
-          stickerIndex:index
+          stickerIndex: index
         })
         break;
     }
